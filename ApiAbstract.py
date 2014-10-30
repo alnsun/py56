@@ -8,8 +8,8 @@ class ApiAbstract(object):
     '''
 
     DOMAIN = 'http://oapi.56.com'
-    APPKEY = '3000005704'
-    SECRET = 'cb35a94bd91359b9'
+    APPKEY = ''
+    SECRET = ''
 
     def __init__(self):
         self.domain = self.DOMAIN

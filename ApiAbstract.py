@@ -12,18 +12,18 @@ class ApiAbstract(object):
     author: Allan Sun <email: alnsun.cn@gmail.com;QQ:301585>
     '''
 
-    def __init__(self):
+    def __init__(self, **kwargs):
         self.domain = DOMAIN
         self.appkey = APPKEY
         self.secret = SECRET
 
-    def setConf(self, **conf):
-        self.appkey = conf['appkey']
-        self.secret = conf['secret']
-        return self
-
-    def get_http(self, url, **params):
-        pass
+    def setConf(self, **kwargs):
+        if 'appkey' in kwargs:
+            self.appkey = kwargs['appkey']
+        if 'secret' in kwargs:
+            self.secret = kwargs['secret']
+        if 'domain' in kwargs:
+            self.domain = kwargs['domain']
 
     def signRequest(self, **params):
         kv_list = params.items()

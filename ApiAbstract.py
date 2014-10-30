@@ -2,19 +2,20 @@ from urllib import urlencode
 from hashlib import md5
 import time
 
+try:
+    from local_config import *
+except:
+    from config import *
+
 class ApiAbstract(object):
     '''
     author: Allan Sun <email: alnsun.cn@gmail.com;QQ:301585>
     '''
 
-    DOMAIN = 'http://oapi.56.com'
-    APPKEY = ''
-    SECRET = ''
-
     def __init__(self):
-        self.domain = self.DOMAIN
-        self.appkey = self.APPKEY
-        self.secret = self.SECRET
+        self.domain = DOMAIN
+        self.appkey = APPKEY
+        self.secret = SECRET
 
     def setConf(self, **conf):
         self.appkey = conf['appkey']

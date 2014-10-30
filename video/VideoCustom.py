@@ -2,16 +2,9 @@ from py56 import ApiAbstract
 
 class VideoCustom(ApiAbstract):
     '''
-    sid
-    css
-    rurl
-    ourl
-    return plugin
+    params: sid css rurl ourl
     '''
-    #def __init__(self):
-    #    super(VideoCustom, self).__init__()
 
-    def get(self, **param):
+    def get(self, **kwargs):
         url = '%s%s' % (self.domain, '/video/custom.plugin')
-        print param
-        return '%s?%s' % (url, self.signRequest(**param))
+        return '%s?%s' % (url, self.signRequest(**kwargs))

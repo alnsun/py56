@@ -25,15 +25,14 @@ class ApiAbstract(object):
         if 'domain' in kwargs:
             self.domain = kwargs['domain']
 
-    def signRequest(self, **params):
-        kv_list = params.items()
+    def signRequest(self, **kwargs):
+        kv_list = kwargs.items()
         kv_list.sort()
 
         req = md5(urlencode(kv_list)).hexdigest()
         ts = int(time.time())
 
-        params['appkey'] = self.appkey
-        params['sign'] = md5('#'.join([req, self.appkey, self.secret, str(ts)])).hexdigest()
-        print 'sign=', params['sign']
-        params['ts'] = str(ts)
-        return urlencode(params)
+        kwargs['appkey'] = self.appkey
+        kwargs['sign'] = md5('#'.join([req, self.appkey, self.secret, str(ts)])).hexdigest()
+        kwargs['ts'] = str(ts)
+        return urlencode(kwargs)

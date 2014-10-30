@@ -13,19 +13,33 @@ class ApiAbstract(object):
     '''
 
     def __init__(self, **kwargs):
-        self.domain = DOMAIN
-        self.appkey = APPKEY
-        self.secret = SECRET
+
+        if not kwargs:
+            if APPKEY and SECRET:
+                self.appkey = APPKEY
+                self.secret = SECRET
+            else:
+                print 'Please config APPKEY and SECRET in config.py'
+                return
+            self.domain = DOMAIN
+
+        self.setConf(**kwargs)
 
     def setConf(self, **kwargs):
-        if 'appkey' in kwargs:
-            self.appkey = kwargs['appkey']
-        if 'secret' in kwargs:
-            self.secret = kwargs['secret']
+
+        if not 'appkey' in kwargs or not 'secret' in kwargs:
+            print 'APPKEY and SECRET are requiremnets'
+            return
+        self.appkey = kwargs['appkey']
+        self.secret = kwargs['secret']
+
         if 'domain' in kwargs:
             self.domain = kwargs['domain']
+        elif DOMAIN:
+            self.domain = DOMAIN
 
     def signRequest(self, **kwargs):
+
         kv_list = kwargs.items()
         kv_list.sort()
 
